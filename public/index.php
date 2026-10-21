@@ -1,9 +1,4 @@
 <?php
-declare(strict_types=1);
-
-session_name('nhasach_session');
-session_start();
-
 require_once __DIR__ . '/../config/constants.php';
 require_once BASE_PATH . '/core/Database.php';
 require_once BASE_PATH . '/core/Model.php';
@@ -13,6 +8,10 @@ require_once BASE_PATH . '/app/Models/Book.php';
 require_once BASE_PATH . '/app/Controllers/BookController.php';
 require_once BASE_PATH . '/app/Models/Category.php';
 require_once BASE_PATH . '/app/Controllers/CategoryController.php';
+require_once BASE_PATH . '/app/Models/Customer.php';
+require_once BASE_PATH . '/app/Controllers/CustomerController.php';
+require_once BASE_PATH . '/app/Models/Sale.php';
+require_once BASE_PATH . '/app/Controllers/SaleController.php';
 
 $router = new Router();
 
@@ -74,5 +73,17 @@ $router->post('/categories', [CategoryController::class, 'store']);
 $router->get('/categories/edit', [CategoryController::class, 'edit']);
 $router->post('/categories/update', [CategoryController::class, 'update']);
 $router->post('/categories/delete', [CategoryController::class, 'delete']);
+
+$router->get('/customers', [CustomerController::class, 'index']);
+$router->get('/customers/create', [CustomerController::class, 'create']);
+$router->post('/customers', [CustomerController::class, 'store']);
+$router->get('/customers/edit', [CustomerController::class, 'edit']);
+$router->post('/customers/update', [CustomerController::class, 'update']);
+$router->post('/customers/delete', [CustomerController::class, 'delete']);
+
+$router->get('/sales', [SaleController::class, 'index']);
+$router->get('/sales/create', [SaleController::class, 'create']);
+$router->post('/sales', [SaleController::class, 'store']);
+$router->post('/sales/delete', [SaleController::class, 'delete']);
 
 $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
